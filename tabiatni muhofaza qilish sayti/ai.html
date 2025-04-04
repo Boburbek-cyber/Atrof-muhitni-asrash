@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daraxt AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e3f2fd;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #suggestions {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daraxtlar Haqida AI</h1>
+        <input type="text" id="treeInput" placeholder="Daraxt nomini kiriting..." oninput="showSuggestions()">
+        <div id="suggestions"></div>
+        <button onclick="searchTree()">Qidirish</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        const trees = {
+            "Olma": { foyda: "Vitaminlarga boy meva beradi.", unib_chiqish: "2-3 yil", hosil: "4-5 yildan keyin", umr: "30-50 yil" },
+            "O‘rik": { foyda: "Oziqaviy va dorivor xususiyatlarga ega.", unib_chiqish: "2-3 yil", hosil: "3-4 yildan keyin", umr: "20-30 yil" },
+            "Gilos": { foyda: "Yurak va immunitet uchun foydali.", unib_chiqish: "2 yil", hosil: "3-5 yildan keyin", umr: "20-25 yil" },
+            "Anor": { foyda: "Temir va antioksidantlarga boy.", unib_chiqish: "2-3 yil", hosil: "4-5 yildan keyin", umr: "50-60 yil" },
+            "Shaftoli": { foyda: "Vitamin A va C ga boy.", unib_chiqish: "2-3 yil", hosil: "3-4 yildan keyin", umr: "15-20 yil" },
+            "Bodom": { foyda: "Qon bosimini tushiradi.", unib_chiqish: "3-4 yil", hosil: "5-6 yildan keyin", umr: "25-30 yil" },
+            "Nok": { foyda: "Oshqozon uchun foydali.", unib_chiqish: "3-4 yil", hosil: "5-6 yildan keyin", umr: "50 yilgacha" },
+            "Tut": { foyda: "Diqqatni yaxshilaydi.", unib_chiqish: "2-3 yil", hosil: "3-4 yildan keyin", umr: "100 yilgacha" },
+            "Olxo'ri": { foyda: "Yurak va qon tomirlariga foydali.", unib_chiqish: "2-3 yil", hosil: "4-5 yildan keyin", umr: "20-30 yil" },
+            "Qulupnay": { foyda: "Yurak va qon tomirlariga foydali.", unib_chiqish: "1-2 yil", hosil: "2-3 yildan keyin", umr: "5-10 yil" }
+        };
+        function searchTree() {
+            const input = document.getElementById("treeInput").value.trim();
+            const resultDiv = document.getElementById("result");
+            
+            if (trees[input]) {
+                const tree = trees[input];
+                resultDiv.innerHTML = `<p><strong>Foydasi:</strong> ${tree.foyda}</p>
+                                       <p><strong>Unib chiqish vaqti:</strong> ${tree.unib_chiqish}</p>
+                                       <p><strong>Hosil berishi:</strong> ${tree.hosil}</p>
+                                       <p><strong>Umri:</strong> ${tree.umr}</p>`;
+            } else {
+                resultDiv.innerHTML = "Bunday daraxt haqida ma'lumot topilmadi.";
+            }
+        }
+
+        function showSuggestions() {
+            const input = document.getElementById("treeInput").value.trim().toLowerCase();
+            const suggestionsDiv = document.getElementById("suggestions");
+            suggestionsDiv.innerHTML = "";
+            if (input.length > 0) {
+                const suggestions = Object.keys(trees).filter(tree => tree.toLowerCase().startsWith(input));
+                if (suggestions.length > 0) {
+                    suggestionsDiv.innerHTML = "Tavsiya: " + suggestions.join(", ");
+                } else {
+                    suggestionsDiv.innerHTML = "Tavsiya: hech narsa topilmadi.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

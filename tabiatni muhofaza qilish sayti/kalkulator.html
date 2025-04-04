@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daraxt Narxi Kalkulyatori</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .display {
+      width: 100%;
+      padding: 10px;
+      font-size: 24px;
+      text-align: center;
+      border: none;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Daraxt Narxi Kalkulyatori</h2>
+    <label for="treeType">Daraxt turi:</label>
+    <select id="treeType" class="display">
+      <option value="10000">Olma - 10,000 so'm</option>
+      <option value="15000">Shaftoli - 15,000 so'm</option>
+      <option value="20000">O'rik - 20,000 so'm</option>
+    </select>
+
+    <label for="quantity">Miqdor:</label>
+    <input type="number" id="quantity" class="display" min="1" value="1">
+
+    <button class="button" onclick="calculatePrice()">Hisoblash</button>
+    <h3>Umumiy narx: <span id="totalPrice">0</span> so'm</h3>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      let treePrice = document.getElementById("treeType").value;
+      let quantity = document.getElementById("quantity").value;
+      let totalPrice = treePrice * quantity;
+      document.getElementById("totalPrice").textContent = totalPrice;
+    }
+  </script>
+</body>
+</html>

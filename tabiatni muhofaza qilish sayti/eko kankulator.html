@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eko Kalkulyator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            padding: 20px;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        select, input, button {
+            padding: 12px;
+            margin: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        select, input {
+            background: white;
+            color: black;
+        }
+        button {
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: green;
+        }
+        h3 {
+            font-size: 24px;
+            margin-top: 15px;
+        }
+        #totalPrice {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffcc00;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Daraxtlar narxini hisoblash</h2>
+        <label for="treeSelect">Daraxt turini tanlang:</label>
+        <select id="treeSelect"></select>
+        <label for="treeQuantity">Soni:</label>
+        <input type="number" id="treeQuantity" min="0" value="0">
+        <button onclick="addTree()">Qo‘shish</button>
+        <h3>Umumiy narx: <span id="totalPrice">0</span> $</h3>
+    </div>
+
+    <script>
+        const trees = [
+            { name: "Olma", price: 10 },
+            { name: "O‘rik", price: 12 },
+            { name: "Gilos", price: 15 },
+            { name: "Shaftoli", price: 14 },
+            { name: "Nok", price: 11 },
+            { name: "O‘rik (kattasi)", price: 20 },
+            { name: "Bodom", price: 18 },
+            { name: "Yong‘oq", price: 25 },
+            { name: "Chinor", price: 30 },
+            { name: "Kedr", price: 35 },
+            { name: "Sosna", price: 28 },
+            { name: "Terak", price: 22 },
+            { name: "Akatsiya", price: 17 },
+            { name: "Limon", price: 40 },
+            { name: "Mandarin", price: 38 },
+            { name: "Anjir", price: 16 },
+            { name: "Tut", price: 19 },
+            { name: "O‘rik (kichigi)", price: 9 },
+            { name: "Qarag‘ay", price: 33 },
+            { name: "Zaytun", price: 50 }
+        ];
+
+        function loadTrees() {
+            const select = document.getElementById("treeSelect");
+            trees.forEach(tree => {
+                let option = document.createElement("option");
+                option.value = tree.price;
+                option.textContent = `${tree.name} - ${tree.price}$`;
+                select.appendChild(option);
+            });
+        }
+
+        function addTree() {
+            let select = document.getElementById("treeSelect");
+            let quantity = document.getElementById("treeQuantity").value;
+            let price = select.value;
+            let total = parseFloat(document.getElementById("totalPrice").textContent);
+            total += price * quantity;
+            document.getElementById("totalPrice").innerText = total;
+            document.getElementById("totalPrice").style.color = "#ff9900";
+            setTimeout(() => {
+                document.getElementById("totalPrice").style.color = "#ffcc00";
+            }, 300);
+        }
+        loadTrees();
+    </script>
+</body>
+</html>
